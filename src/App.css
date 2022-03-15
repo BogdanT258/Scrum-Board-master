@@ -1,0 +1,17 @@
+*{
+  margin: 0;
+}
+.outer-div{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cards{
+  margin: 20px;
+}
+.btn{
+  width: 100%;
+}
+.title{
+  text-align: center;
+}

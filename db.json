@@ -1,0 +1,83 @@
+{
+  "boards": [
+    {
+      "id": 1,
+      "title": "Backlog",
+      "state": "backlog"
+    },
+    {
+      "id": 2,
+      "title": "To Do",
+      "state": "todo"
+    },
+    {
+      "id": 3,
+      "title": "In Progress",
+      "state": "inprogress"
+    },
+    {
+      "id": 4,
+      "title": "Done",
+      "state": "done"
+    }
+  ],
+  "cards": [
+    {
+      "id": 1,
+      "state": "backlog",
+      "title": "Custom Report",
+      "description": "Name of cities - Sometimes there are multiple cities, in different regions/countries, with same name. When selecting only city data will show sum of all cities for city with same name. This can only be resolved by using region/country select",
+      "labels": ["bug"]
+    },
+    {
+      "id": 2,
+      "state": "backlog",
+      "title": "Release Beta version",
+      "description": "Planning meeting Friday to discuss.",
+      "labels": ["on hold"]
+    },
+    {
+      "id": 3,
+      "state": "todo",
+      "title": "Scheduled Reports",
+      "description": "Users to be able to receive daily or weekley saved reports.",
+      "labels": ["on hold"]
+    },
+    {
+      "id": 4,
+      "state": "inprogress",
+      "title": "Apply changes discussed on meeting",
+      "description": "Add explanation what affects coverage charts, what doesnt",
+      "labels": ["report"]
+    },
+    {
+      "id": 5,
+      "state": "done",
+      "title": "Update Documentation",
+      "description": "Update documentation for project, add descriptions about new features.",
+      "labels": ["report"]
+    },
+    {
+      "id": 6,
+      "state": "todo",
+      "title": "Manual Testing",
+      "description": "Test all new features.",
+      "labels": ["report"]
+    },
+    {
+      "id": 7,
+      "state": "inprogress",
+      "title": "Implement Database change",
+      "description": "Add new columns to database.",
+      "labels": ["enhancement"]
+    },
+    {
+      "id": 7,
+      "state": "inprogress",
+      "title": "Report data difference",
+      "description": "Data from campaigns doesn't correspond with custom report data.",
+      "labels": ["bug"]
+    }
+  ],
+  "labels": ["report", "enhancement", "on hold", "bug"]
+}
