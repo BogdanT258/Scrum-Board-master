@@ -14,6 +14,7 @@ class InnerCard extends Component{
     async componentDidMount() {
         try{
           const res = await(await fetch('http://localhost:3004/cards')).json();
+          console.log(this.props);
           this.setState({
             data: res
           })
@@ -24,15 +25,14 @@ class InnerCard extends Component{
 
     render(){
         return(
-        <Card>
-            <Card.Header>yoo</Card.Header>
-            <Card.Body>
-                <Card.Title>Special title treatment</Card.Title>
-                <Card.Text>
-                  With supporting text below as a natural lead-in to additional content.
-                </Card.Text>        
-            </Card.Body>
-        </Card>
+          <div>
+            {/* {this.state.data.map.filter(item => {
+              if (item.state == "backlog") {
+                return this.props.filterData(item);
+              }else console.log("yikes");
+            })} */}
+            {this.props.filterData({name:"yoo"})}
+          </div>
         )
     }
 }

@@ -13,9 +13,7 @@ class App extends Component{
   render(){
     return (
       <div className='outer-div'>
-        <BoardComponent>
-          <InnerCard></InnerCard>
-        </BoardComponent>
+        <BoardComponent/>
       </div>
     )
   }

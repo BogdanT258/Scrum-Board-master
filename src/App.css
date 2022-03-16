@@ -2,12 +2,15 @@
   margin: 0;
 }
 .outer-div{
+  display: flex;  
+  justify-content: center;  
+}
+.card{
+  margin: 20px;
+}
+.cards{  
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-}
-.cards{
-  margin: 20px;
 }
 .btn{
   width: 100%;

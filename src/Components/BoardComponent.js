@@ -9,7 +9,8 @@ class BoardComponent extends Component{
         super(props); 
         
         this.state = {
-          data: []
+          data: [],
+          cards:[]
         }
     }
 
@@ -18,27 +19,30 @@ class BoardComponent extends Component{
         const res = await(await fetch('http://localhost:3004/boards')).json();
         this.setState({
           data: res
-        })
-        console.log(res);
+        })        
       }catch(err){
         console.log(err);
       }
     }
+    filterData = (obj) => {
+      <InnerCard itemState={item} filterData={this.filterData}/>
+    }
 
     render(){
         return(
-            <div className='cards'>
-              <h1>{this.state.data.title}</h1>
+            <div className='cards'>              
               {this.state.data.map(item => {
-                <Card className='card' border='primary' style={{ width: '18rem' }}>
-                <Card.Body>
-                  <Card.Title className='title'>{item.title}</Card.Title>
-                  <Button className='btn' variant="primary" size="lg">
-                    &#x2b;
-                  </Button>
-                  <InnerCard/>
-                </Card.Body>
-                </Card>
+                return (
+                  <Card key={item.id} className='card' border='primary' style={{ width: '18rem' }}>
+                  <Card.Body>
+                    <Card.Title className='title'>{item.title}</Card.Title>
+                    <Button className='btn' variant="primary" size="lg">
+                      &#x2b;
+                    </Button>
+                    {this.filterData()}              
+                  </Card.Body>
+                  </Card>
+                )
               })}
             </div>
         )
