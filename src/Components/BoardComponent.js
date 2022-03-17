@@ -6,7 +6,7 @@ import InnerCard from './InnerCard';
 
 class BoardComponent extends Component{
     constructor(props){
-        super(props); 
+        super(props);         
         
         this.state = {
           data: [],
@@ -23,9 +23,12 @@ class BoardComponent extends Component{
       }catch(err){
         console.log(err);
       }
-    }
-    filterData = (obj) => {
-      <InnerCard itemState={item} filterData={this.filterData}/>
+    }   
+    
+    sendDataToParent = (item) => {
+      this.setState({
+        cards: [...this.state.cards, item]
+      })
     }
 
     render(){
@@ -39,7 +42,9 @@ class BoardComponent extends Component{
                     <Button className='btn' variant="primary" size="lg">
                       &#x2b;
                     </Button>
-                    {this.filterData()}              
+                    {this.state.data.map(item => {
+                      <InnerCard item={item}/>
+                    })}              
                   </Card.Body>
                   </Card>
                 )

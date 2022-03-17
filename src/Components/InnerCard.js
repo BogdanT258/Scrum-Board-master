@@ -25,13 +25,8 @@ class InnerCard extends Component{
 
     render(){
         return(
-          <div>
-            {/* {this.state.data.map.filter(item => {
-              if (item.state == "backlog") {
-                return this.props.filterData(item);
-              }else console.log("yikes");
-            })} */}
-            {this.props.filterData({name:"yoo"})}
+          <div>          
+            
           </div>
         )
     }
