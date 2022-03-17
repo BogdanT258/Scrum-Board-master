@@ -13,8 +13,7 @@ class InnerCard extends Component{
 
     async componentDidMount() {
         try{
-          const res = await(await fetch('http://localhost:3004/cards')).json();
-          console.log(this.props);
+          const res = await(await fetch('http://localhost:3004/cards')).json();          
           this.setState({
             data: res
           })
@@ -22,11 +21,21 @@ class InnerCard extends Component{
           console.log(err);
         }
       }
-
+      displayDom = (item) => {       
+        return(
+          <div>
+            <h1>{item.title}</h1>
+          </div>
+        )       
+      }
     render(){
         return(
           <div>          
-            
+            {this.state.data.map(item => {
+              if (item.state == this.props) {
+                this.displayDom(item);
+              }
+            })}
           </div>
         )
     }

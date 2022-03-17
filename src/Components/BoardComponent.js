@@ -42,9 +42,7 @@ class BoardComponent extends Component{
                     <Button className='btn' variant="primary" size="lg">
                       &#x2b;
                     </Button>
-                    {this.state.data.map(item => {
-                      <InnerCard item={item}/>
-                    })}              
+                    <InnerCard item={item} sendData={this.sendDataToParent}/>             
                   </Card.Body>
                   </Card>
                 )
