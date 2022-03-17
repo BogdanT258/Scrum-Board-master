@@ -7,7 +7,8 @@ class InnerCard extends Component{
         super(props)
 
         this.state = {
-            data: []
+            data: [],
+            data1:[]
           }
     }
 
@@ -22,19 +23,17 @@ class InnerCard extends Component{
         }
       }
       displayDom = (item) => {       
-        return(
-          <div>
-            <h1>{item.title}</h1>
-          </div>
-        )       
+        let arr = [];
+        arr = [...arr, item];
+        console.log(arr);   
       }
     render(){
         return(
           <div>          
             {this.state.data.map(item => {
-              if (item.state == this.props) {
+              if (item.state == this.props.item.state) {
                 this.displayDom(item);
-              }
+              }              
             })}
           </div>
         )

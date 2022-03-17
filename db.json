@@ -72,7 +72,7 @@
       "labels": ["enhancement"]
     },
     {
-      "id": 7,
+      "id": 8,
       "state": "inprogress",
       "title": "Report data difference",
       "description": "Data from campaigns doesn't correspond with custom report data.",
