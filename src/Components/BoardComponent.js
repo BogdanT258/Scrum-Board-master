@@ -1,16 +1,13 @@
 import '../App.css';
 import { Component } from 'react';
-import Card from 'react-bootstrap/Card';
-import Button  from 'react-bootstrap/Button';
-import InnerCard from './InnerCard';
+import Board from './Board';
 
 class BoardComponent extends Component{
     constructor(props){
         super(props);         
         
         this.state = {
-          data: [],
-          cards:[]
+          data: []
         }
     }
 
@@ -23,28 +20,14 @@ class BoardComponent extends Component{
       }catch(err){
         console.log(err);
       }
-    }   
-    
-    sendDataToParent = (item) => {
-      this.setState({
-        cards: item
-      })
-    }
+    }           
 
     render(){
         return(
             <div className='cards'>              
               {this.state.data.map(item => {
                 return (
-                  <Card key={item.id} className='card' border='primary' style={{ width: '18rem' }}>
-                  <Card.Body>
-                    <Card.Title className='title'>{item.title}</Card.Title>
-                    <Button className='btn' variant="primary" size="lg">
-                      &#x2b;
-                    </Button>
-                    <InnerCard item={item} sendData={this.sendDataToParent}/>             
-                  </Card.Body>
-                  </Card>
+                  <Board key={item.id} item={item}/>
                 )
               })}
             </div>
