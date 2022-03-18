@@ -15,7 +15,7 @@ class Board extends Component{
 
     async componentDidMount() {
         try{
-          const res = await(await fetch('http://localhost:3004/cards')).json();          
+          const res = await(await fetch(`http://localhost:3004/cards?state=${this.props.item.state}`)).json();          
           this.setState({
             data: res
           })
