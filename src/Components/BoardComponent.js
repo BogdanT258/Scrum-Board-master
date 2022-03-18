@@ -24,13 +24,18 @@ class BoardComponent extends Component{
 
     render(){
         return(
-            <div className='cards'>              
+          <div className='container'>
+            <div>
+              <h1>SCRUM BOARD</h1>
+            </div>
+            <div className='cards'>                                        
               {this.state.data.map(item => {
-                return (
-                  <Board key={item.id} item={item}/>
+                return (                  
+                    <Board key={item.id} item={item}/>                
                 )
               })}
             </div>
+          </div>
         )
     }
 }
