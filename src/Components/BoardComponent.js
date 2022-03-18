@@ -27,7 +27,7 @@ class BoardComponent extends Component{
     
     sendDataToParent = (item) => {
       this.setState({
-        cards: [...this.state.cards, item]
+        cards: item
       })
     }
 

@@ -24,16 +24,18 @@ class InnerCard extends Component{
       }
       displayDom = (item) => {       
         let arr = [];
-        arr = [...arr, item];
+        this.setState({
+          data1: item
+        })
         console.log(arr);   
       }
     render(){
         return(
           <div>          
             {this.state.data.map(item => {
-              if (item.state == this.props.item.state) {
+              if (item.state == "backlog") {
                 this.displayDom(item);
-              }              
+              }else console.log("not backlog");           
             })}
           </div>
         )
