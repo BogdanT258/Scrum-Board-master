@@ -2,6 +2,7 @@ import '../App.css';
 import { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 
+
 class InnerCard extends Component{
     constructor(props){
         super(props)     
