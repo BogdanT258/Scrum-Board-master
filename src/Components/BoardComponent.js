@@ -31,7 +31,7 @@ class BoardComponent extends Component{
             <div className='cards'>                                        
               {this.state.data.map(item => {
                 return (                  
-                    <Board key={item.id} item={item}/>                
+                    <Board key={item.id} item={item} callback={this.componentDidMount}/>                
                 )
               })}
             </div>

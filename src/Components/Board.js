@@ -38,14 +38,20 @@ class Board extends Component{
     addCard = (e) => {
       const formData = new FormData(e.currentTarget);
       e.preventDefault();
-      let obj = {};      
+      let arr = {};      
       for (let [key, value] of formData.entries()) {                
-        obj[key] = value;        
-      }           
-      this.setState({
-        data: [...this.state.data, obj],
-        openModal : false
-      })         
+        arr[key] = value;        
+      }   
+      const url = "http://localhost:3004/cards";
+      const options = {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(arr) 
+      }
+      const res = fetch(url, options)      
+      this.props.componentDidMount()                                            
     }
 
     render(){

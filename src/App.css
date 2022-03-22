@@ -15,7 +15,7 @@
   margin: 10px;  
 }
 .cards{  
-  display: flex;  
+  display: flex;    
   flex-wrap: wrap;
   border: 5px solid #6bc9c7;
   background-color: #519e9d;
