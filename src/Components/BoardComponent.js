@@ -12,15 +12,18 @@ class BoardComponent extends Component{
     }
 
     async componentDidMount() {
+      this.listCards();
+    }           
+    listCards =  async () => {  
       try{
-        const res = await(await fetch('http://localhost:3004/boards')).json();
+        const res = await(await fetch('http://localhost:3004/boards')).json(); 
         this.setState({
           data: res
         })        
       }catch(err){
         console.log(err);
-      }
-    }           
+      }          
+    }
 
     render(){
         return(
@@ -31,7 +34,7 @@ class BoardComponent extends Component{
             <div className='cards'>                                        
               {this.state.data.map(item => {
                 return (                  
-                    <Board key={item.id} item={item} callback={this.componentDidMount}/>                
+                    <Board key={item.id} item={item} listCards={this.listCards}/>                
                 )
               })}
             </div>

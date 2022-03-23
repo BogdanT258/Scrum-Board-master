@@ -13,13 +13,14 @@ class Board extends Component{
 
         this.state = {
             data: [],
-            openModal : false
+            openModal : false,
+            updatedData: false
           }     
     }  
     
     async componentDidMount() {
         try{
-          const res = await(await fetch(`http://localhost:3004/cards?state=${this.props.item.state}`)).json();          
+          const res = await(await fetch(`http://localhost:3004/cards?state=${this.props.item.state}`)).json();                   
           this.setState({
             data: res
           })
@@ -41,17 +42,22 @@ class Board extends Component{
       let arr = {};      
       for (let [key, value] of formData.entries()) {                
         arr[key] = value;        
-      }   
-      const url = "http://localhost:3004/cards";
-      const options = {
+      }  
+      try {
+        const url = "http://localhost:3004/cards";
+        const options = {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(arr) 
+        body: JSON.stringify(arr)         
       }
-      const res = fetch(url, options)      
-      this.props.componentDidMount()                                            
+        const res = fetch(url, options)
+        this.setState({updatedData: !this.state.updatedData})
+        this.props.listCards();
+      } catch (err) {
+        console.log(err);
+      }                                                    
     }
 
     render(){
