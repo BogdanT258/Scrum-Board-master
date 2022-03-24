@@ -19,22 +19,31 @@ class Board extends Component{
     }  
     
     async componentDidMount() {
-        try{
-          const res = await(await fetch(`http://localhost:3004/cards?state=${this.props.item.state}`)).json();                   
-          this.setState({
-            data: res
-          })
-        }catch(err){
-          console.log(err);
-        }
+        this.listData();
       } 
-    handleChange = e =>{  
-      let obj = this.state.cardData;
-      if (e.target.name === "labels") {
-        obj.labels.push(e.target.value);
+    listData = async () => {
+      try{
+        const res = await(await fetch(`http://localhost:3004/cards?state=${this.props.item.state}`)).json();                   
         this.setState({
-          cardData: obj
-        });
+          data: res
+        })
+      }catch(err){
+        console.log(err);
+      }
+    }
+    handleChange = e =>{  
+      let obj = {...this.state.cardData};
+      if (e.target.name === "labels") {
+        console.log("yoo");        
+          if (obj.labels.includes(e.target.value)) {
+            console.log("Overlaped label");
+          }else{     
+            console.log("else");     
+            obj.labels.push(e.target.value);
+            this.setState({
+              cardData: obj
+            });
+          }        
       }else{
         obj[e.target.name] = e.target.value
         this.setState({
@@ -50,13 +59,8 @@ class Board extends Component{
     onCloseModal = ()=>{
         this.setState({openModal : false})
     }
-    addCard = async (e) => {
-      const formData = new FormData(e.currentTarget);
-      e.preventDefault();
-      let arr = {};      
-      for (let [key, value] of formData.entries()) {                
-        arr[key] = value;        
-      }  
+    addCard = async (e) => {    
+      e.preventDefault();        
       try {
         const url = "http://localhost:3004/cards";
         const options = {
@@ -64,10 +68,10 @@ class Board extends Component{
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(arr)         
+        body: JSON.stringify(this.state.cardData)         
       }
         const res = await(await fetch(url, options)).json();        
-        this.props.listCards();
+        this.listData();
       } catch (err) {
         console.log(err);
       }                                                    
@@ -94,8 +98,7 @@ class Board extends Component{
                         <Form.Control as="textarea" rows={5} placeholder="Enter description" value={this.state.cardData.description} onChange={this.handleChange} name="description"/>
                       </Form.Group>
                       <Form.Group className="mb-3">
-                      <Form.Select aria-label="Default select example" value={this.state.cardData.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">
-                        <option>Label</option>
+                      <Form.Select aria-label="Default select example" value={this.state.cardData.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">                        
                         <option value="report">Report</option>
                         <option value="enhancement">Enhancement</option>
                         <option value="on hold">On Hold</option>
