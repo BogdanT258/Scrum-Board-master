@@ -1,6 +1,7 @@
 import '../App.css';
 import { Component } from 'react';
 import Card from 'react-bootstrap/Card';
+import Labels from './Labels';
 
 
 class InnerCard extends Component{
@@ -14,15 +15,15 @@ class InnerCard extends Component{
             <Card  border='primary'>
               <Card.Body>
                 {/* {renderLabel()}  */}
-                {this.props.item.labels.map(item => {                  
+                {this.props.item.labels.map(item => {                                
                   if (item == "bug") {
-                    return <label className='label label-red'>{item}</label>;
+                    return <label key={item} className='label label-red'>{item}</label>;
                   } else if(item == "on hold"){
-                    return <label className='label label-blue'>{item}</label>;
+                    return <label key={item} className='label label-blue'>{item}</label>;
                   }else if (item == "report") {
-                    return <label className='label label-purple'>{item}</label>;
+                    return <label key={item} className='label label-purple'>{item}</label>;
                   }else if (item == "enhancement") {
-                    return <label className='label label-green'>{item}</label>;
+                    return <label key={item} className='label label-green'>{item}</label>;
                   }
                 })}                                              
                 <Card.Title className="text-center">{this.props.item.title}</Card.Title>

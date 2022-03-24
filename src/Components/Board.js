@@ -14,7 +14,7 @@ class Board extends Component{
         this.state = {
             data: [],
             openModal : false,
-            updatedData: false
+            cardData: { title: '' , labels: [] , description: ' ', state: this.props.item.state}
           }     
     }  
     
@@ -27,7 +27,21 @@ class Board extends Component{
         }catch(err){
           console.log(err);
         }
-      }   
+      } 
+    handleChange = e =>{  
+      let obj = this.state.cardData;
+      if (e.target.name === "labels") {
+        obj.labels.push(e.target.value);
+        this.setState({
+          cardData: obj
+        });
+      }else{
+        obj[e.target.name] = e.target.value
+        this.setState({
+          cardData: obj
+       });
+      }      
+    }  
     onClickButton = e =>{
         e.preventDefault()
         this.setState({openModal : true})
@@ -36,7 +50,7 @@ class Board extends Component{
     onCloseModal = ()=>{
         this.setState({openModal : false})
     }
-    addCard = (e) => {
+    addCard = async (e) => {
       const formData = new FormData(e.currentTarget);
       e.preventDefault();
       let arr = {};      
@@ -52,8 +66,7 @@ class Board extends Component{
         },
         body: JSON.stringify(arr)         
       }
-        const res = fetch(url, options)
-        this.setState({updatedData: !this.state.updatedData})
+        const res = await(await fetch(url, options)).json();        
         this.props.listCards();
       } catch (err) {
         console.log(err);
@@ -73,15 +86,15 @@ class Board extends Component{
                     <Form onSubmit={this.addCard}>
                       <Form.Group className="mb-3">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" placeholder="Enter title" name="title"/>                                               
+                        <Form.Control type="text" placeholder="Enter title" name="title" value={this.state.cardData.title} onChange={this.handleChange}/>                                               
                       </Form.Group>
 
                       <Form.Group className="mb-3">
                         <Form.Label>Example textarea</Form.Label>
-                        <Form.Control as="textarea" rows={5} placeholder="Enter description" name="description"/>
+                        <Form.Control as="textarea" rows={5} placeholder="Enter description" value={this.state.cardData.description} onChange={this.handleChange} name="description"/>
                       </Form.Group>
                       <Form.Group className="mb-3">
-                      <Form.Select aria-label="Default select example" name='labels'>
+                      <Form.Select aria-label="Default select example" value={this.state.cardData.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">
                         <option>Label</option>
                         <option value="report">Report</option>
                         <option value="enhancement">Enhancement</option>
