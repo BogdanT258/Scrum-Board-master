@@ -105,25 +105,13 @@
       "id": 9
     },
     {
-      "title": "dafad",
+      "title": "adf",
       "labels": [
-        "enhancement",
-        "on hold"
+        "enhancement"
       ],
       "description": " dafadf",
       "state": "todo",
       "id": 10
-    },
-    {
-      "title": "dafad",
-      "labels": [
-        "enhancement",
-        "on hold",
-        "bug"
-      ],
-      "description": " dafafad",
-      "state": "inprogress",
-      "id": 11
     }
   ],
   "labels": [

@@ -14,7 +14,8 @@ class Board extends Component{
         this.state = {
             data: [],
             openModal : false,
-            cardData: { title: '' , labels: [] , description: ' ', state: this.props.item.state}
+            cardData: { title: '' , labels: [] , description: ' ', state: this.props.item.state},           
+            labels: []
           }     
     }  
     
@@ -23,9 +24,11 @@ class Board extends Component{
       } 
     listData = async () => {
       try{
-        const res = await(await fetch(`http://localhost:3004/cards?state=${this.props.item.state}`)).json();                   
+        const resLabels = await(await fetch(`http://localhost:3004/labels`)).json();
+        const res = await(await fetch(`http://localhost:3004/cards?state=${this.props.item.state}`)).json();                          
         this.setState({
-          data: res
+          data: res,
+          labels: resLabels       
         })
       }catch(err){
         console.log(err);
@@ -33,12 +36,10 @@ class Board extends Component{
     }
     handleChange = e =>{  
       let obj = {...this.state.cardData};
-      if (e.target.name === "labels") {
-        console.log("yoo");        
+      if (e.target.name === "labels") {               
           if (obj.labels.includes(e.target.value)) {
             console.log("Overlaped label");
-          }else{     
-            console.log("else");     
+          }else{                     
             obj.labels.push(e.target.value);
             this.setState({
               cardData: obj
@@ -57,7 +58,10 @@ class Board extends Component{
     }
 
     onCloseModal = ()=>{
-        this.setState({openModal : false})
+        this.setState({
+          openModal : false,
+          cardData: { title: '' , labels: [] , description: ' ', state: this.props.item.state}
+        })        
     }
     addCard = async (e) => {    
       e.preventDefault();        
@@ -70,11 +74,11 @@ class Board extends Component{
         },
         body: JSON.stringify(this.state.cardData)         
       }
-        const res = await(await fetch(url, options)).json();        
+        await(await fetch(url, options)).json();        
         this.listData();
       } catch (err) {
         console.log(err);
-      }                                                    
+      }        
     }
 
     render(){
@@ -94,15 +98,14 @@ class Board extends Component{
                       </Form.Group>
 
                       <Form.Group className="mb-3">
-                        <Form.Label>Example textarea</Form.Label>
+                        <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea" rows={5} placeholder="Enter description" value={this.state.cardData.description} onChange={this.handleChange} name="description"/>
                       </Form.Group>
                       <Form.Group className="mb-3">
-                      <Form.Select aria-label="Default select example" value={this.state.cardData.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">                        
-                        <option value="report">Report</option>
-                        <option value="enhancement">Enhancement</option>
-                        <option value="on hold">On Hold</option>
-                        <option value="bug">Bug</option>
+                      <Form.Select aria-label="Default select example" value={this.state.cardData.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">                                              
+                      {this.state.labels.map(item => {                        
+                        return <option key={item} value={item}>{item}</option>                                                                                                             
+                      })}                        
                       </Form.Select>
                       </Form.Group>
                       <Button variant="primary" type="submit">
@@ -110,8 +113,8 @@ class Board extends Component{
                       </Button>
                     </Form>
                     </Modal>                                                       
-                    {this.state.data.map(item => {                       
-                            return <InnerCard key={item.id} item={item}/>                                                  
+                    {this.state.data.map(item => {                                        
+                      return <InnerCard key={item.id} item={item}/>                                                                                                            
                     })}                              
                   </Card.Body>
                   </Card>
