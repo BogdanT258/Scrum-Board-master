@@ -34,7 +34,7 @@
   border: 1px solid black;
   padding: 5px 10px;
   color: white;
-  border-radius: 5px;
+  border-radius: 20px;
   margin: 3px;
   text-transform: capitalize;
 }
@@ -52,4 +52,16 @@ option{
 }
 .label-green{
   background-color: #6ad68a;
+}
+.edit{
+  display: flex;
+  justify-content: space-between;  
+}
+.edit button{
+  width: 50px;
+  height: 40px;  
+}
+.labels-div{
+  display: flex;
+  flex-wrap: wrap;
 }

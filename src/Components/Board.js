@@ -101,11 +101,12 @@ class Board extends Component{
                         <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea" rows={5} placeholder="Enter description" value={this.state.cardData.description} onChange={this.handleChange} name="description"/>
                       </Form.Group>
+
                       <Form.Group className="mb-3">
                       <Form.Select aria-label="Default select example" value={this.state.cardData.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">                                              
-                      {this.state.labels.map(item => {                        
-                        return <option key={item} value={item}>{item}</option>                                                                                                             
-                      })}                        
+                        {this.state.labels.map(item => {                        
+                          return <option key={item} value={item}>{item}</option>                                                                                                             
+                        })}                        
                       </Form.Select>
                       </Form.Group>
                       <Button variant="primary" type="submit">
@@ -114,7 +115,7 @@ class Board extends Component{
                     </Form>
                     </Modal>                                                       
                     {this.state.data.map(item => {                                        
-                      return <InnerCard key={item.id} item={item}/>                                                                                                            
+                      return <InnerCard key={item.id} item={item} labels={this.state.labels}/>                                                                                                            
                     })}                              
                   </Card.Body>
                   </Card>
