@@ -118,7 +118,7 @@ class Board extends Component{
                     </Form>
                     </Modal>                                                       
                     {this.state.data.map(item => {                                        
-                      return <InnerCard key={item.id} item={item} labels={this.state.labels}/>                                                                                                            
+                      return <InnerCard key={item.id} item={item} labels={this.state.labels} listData={this.listData}/>                                                                                                            
                     })}                              
                   </Card.Body>
                   </Card>

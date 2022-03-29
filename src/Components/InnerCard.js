@@ -8,26 +8,9 @@ class InnerCard extends Component{
     constructor(props){
         super(props)               
         this.state = {    
-          openModal: false,
-          cardData: {}
+          openModal: false,          
         }     
-    }       
-  saveCard = async (e) => {
-    e.preventDefault();
-    try {
-      const url = `http://localhost:3004/cards?id=${this.props.id}`;
-      const options = {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state.cardData)         
-    }
-      await(await fetch(url, options)).json();              
-    } catch (err) {
-      console.log(err);
-    }          
-  }      
+    }              
     render(){            
         return(
           <div className='inner-Card'>             
@@ -48,7 +31,7 @@ class InnerCard extends Component{
                 })} 
                 </div> 
                   <div>
-                    <EditCard id={this.props.item.id}/>                    
+                    <EditCard id={this.props.item.id} listData={this.props.listData}/>                    
                   </div>
                 </div>
                 <Card.Title className="text-center">{this.props.item.title}</Card.Title>

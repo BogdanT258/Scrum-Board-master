@@ -45,8 +45,9 @@ class EditCard extends Component{
     handleChange = e => {
         let obj = {...this.state.data};
         console.log(obj);
-          if (e.target.name === "labels") {               
-              if (obj.labels.includes(e.target.value)) {
+          if (e.target.name === "labels") {   
+              console.log(e);            
+              if (obj[0].labels.includes(e.target.value)) {               
                 console.log("Overlaped label");            
               }else{                                 
                 obj[0].labels.push(e.target.value);
@@ -74,7 +75,7 @@ class EditCard extends Component{
           body: JSON.stringify(this.state.data[0])         
         }
           await(await fetch(url, options)).json(); 
-          this.listData(); 
+          this.props.listData(); 
           this.setState({
             openModal : false
           })            
@@ -102,9 +103,13 @@ class EditCard extends Component{
 
                       <Form.Group className="mb-3">
                       <Form.Select aria-label="Default select example" value={this.state.data.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">                                              
-                        {this.state.data[0].labels.map(item => {                        
-                          return <option key={item} value={item} selected>{item}</option>                                                                                                             
-                        })}                        
+                        {this.state.labels.map(item => {
+                            if (item == this.state.data[0].labels) {                                
+                                return <option value={item} selected>{item}</option>                                              
+                            }else{
+                                return <option value={item}>{item}</option> 
+                            }
+                        })}                       
                       </Form.Select>
                       </Form.Group>
 
