@@ -18,6 +18,9 @@ class EditCard extends Component{
         }
     }
     async componentDidMount() {
+        this.listData();
+    }  
+    listData = async () => {
         try{
             const res = await(await fetch('http://localhost:3004/labels')).json(); 
             const res1 = await(await fetch(`http://localhost:3004/cards?id=${this.props.id}`)).json(); 
@@ -27,8 +30,8 @@ class EditCard extends Component{
             })        
           }catch(err){
             console.log(err);
-          }   
-    }  
+          } 
+      }
     onClickButton = e =>{
         e.preventDefault()      
         this.setState({openModal : true})
@@ -61,8 +64,7 @@ class EditCard extends Component{
     saveCard = async (e) => {
         e.preventDefault();
         try {
-          const url = `http://localhost:3004/cards/${this.props.id}`;
-          console.log("save card");
+          const url = `http://localhost:3004/cards/${this.props.id}`;          
           const options = {
           method: "PUT",
           headers: {
@@ -71,7 +73,11 @@ class EditCard extends Component{
           },
           body: JSON.stringify(this.state.data[0])         
         }
-          await(await fetch(url, options)).json();              
+          await(await fetch(url, options)).json(); 
+          this.listData(); 
+          this.setState({
+            openModal : false
+          })            
         } catch (err) {
           console.log(err);
         }          

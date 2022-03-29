@@ -76,6 +76,9 @@ class Board extends Component{
       }
         await(await fetch(url, options)).json();        
         this.listData();
+        this.setState({
+          openModal : false
+        })
       } catch (err) {
         console.log(err);
       }        
