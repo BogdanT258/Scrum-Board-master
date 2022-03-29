@@ -1,10 +1,7 @@
 import '../App.css';
 import { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import { BsFillPenFill } from "react-icons/bs";
-import Button  from 'react-bootstrap/Button';
-import { Form } from 'react-bootstrap';
-import { Modal } from 'react-responsive-modal';
+import EditCard from './EditCard';
 
 
 class InnerCard extends Component{
@@ -14,42 +11,7 @@ class InnerCard extends Component{
           openModal: false,
           cardData: {}
         }     
-    }  
-
-    componentWillReceiveProps = (props) =>{
-      this.setState({
-        cardData: this.props.item
-      })
-    }
-    onClickButton = e =>{
-      e.preventDefault()      
-      this.setState({openModal : true})
-  }
-
-  onCloseModal = ()=>{
-      this.setState({
-        openModal : false,        
-      })        
-  }
-  handleChange = e => {
-    let obj = {...this.state.cardData};
-    console.log(obj);
-      if (e.target.name === "labels") {               
-          if (obj.labels.includes(e.target.value)) {
-            console.log("Overlaped label");            
-          }else{                                 
-            obj.labels.push(e.target.value);
-            this.setState({
-              cardData: obj
-            });
-          }        
-      }else{
-        obj[e.target.name] = e.target.value
-        this.setState({
-          cardData: obj
-       });
-      }      
-  }
+    }       
   saveCard = async (e) => {
     e.preventDefault();
     try {
@@ -85,35 +47,8 @@ class InnerCard extends Component{
                   }else return <label key={item} className='label'>{item}</label>;
                 })} 
                 </div> 
-                  <div>                      
-                    <Button onClick={this.onClickButton}>
-                      <BsFillPenFill/>
-                    </Button>
-                    <Modal open={this.state.openModal} onClose={this.onCloseModal}>
-                      <Form onSubmit={this.saveCard}>
-                        <Form.Group className="mb-3">
-                          <Form.Label>Title</Form.Label>
-                          <Form.Control type="text" placeholder="Enter title" name="title" value={this.state.title} onChange={this.handleChange}/>                                               
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control as="textarea" rows={5} placeholder="Enter description" value={this.props.item.description} onChange={this.handleChange} name="description"/>
-                      </Form.Group>
-
-                      <Form.Group className="mb-3">
-                      <Form.Select aria-label="Default select example" value={this.props.item.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">                                              
-                        {this.props.labels.map(item => {                        
-                          return <option key={item} value={item}>{item}</option>                                                                                                             
-                        })}                        
-                      </Form.Select>
-                      </Form.Group>
-
-                      <Button variant="primary" type="submit">
-                        Save
-                      </Button>
-                      </Form>
-                    </Modal>                     
+                  <div>
+                    <EditCard id={this.props.item.id}/>                    
                   </div>
                 </div>
                 <Card.Title className="text-center">{this.props.item.title}</Card.Title>
