@@ -97,8 +97,6 @@
     {
       "title": "ddag",
       "labels": [
-        "report",
-        "on hold",
         "bug",
         "enhancement"
       ],
@@ -247,23 +245,22 @@
       "id": 20
     },
     {
-      "title": "d",
+      "title": "ddgaad",
       "labels": [
-        "on hold",
-        "enhancement",
-        "report"
+        "report",
+        "bug",
+        "enhancement"
       ],
       "description": " dgad",
       "state": "todo",
       "id": 21
     },
     {
-      "title": "fhsfh",
+      "title": "fhsfhadfadf",
       "labels": [
-        "enhancement",
-        "on hold"
+        "enhancement"
       ],
-      "description": "sfhfsh",
+      "description": "sfhfshadfadf",
       "state": "backlog",
       "id": 22
     }

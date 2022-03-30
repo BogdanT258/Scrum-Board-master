@@ -1,6 +1,5 @@
 import '../App.css';
 import { Component } from 'react';
-import Card from 'react-bootstrap/Card';
 import { BsFillPenFill } from "react-icons/bs";
 import Button  from 'react-bootstrap/Button';
 import { Form } from 'react-bootstrap';
@@ -14,7 +13,7 @@ class EditCard extends Component{
         this.state = {
             openModal: false,
             labels: [],
-            data: [{title: "", description: "", labels: []}]
+            data: [{title: "", description: "", labels: []}],            
         }
     }
     async componentDidMount() {
@@ -26,7 +25,7 @@ class EditCard extends Component{
             const res1 = await(await fetch(`http://localhost:3004/cards?id=${this.props.id}`)).json(); 
             this.setState({
               labels: res,
-              data: res1
+              data: res1[0]
             })        
           }catch(err){
             console.log(err);
@@ -43,24 +42,11 @@ class EditCard extends Component{
         })        
     }
     handleChange = e => {
-        let obj = {...this.state.data};
-        console.log(obj);
-          if (e.target.name === "labels") {   
-              console.log(e);            
-              if (obj[0].labels.includes(e.target.value)) {               
-                console.log("Overlaped label");            
-              }else{                                 
-                obj[0].labels.push(e.target.value);
-                this.setState({
-                  data: obj
-                });
-              }        
-          }else{
-            obj[0][e.target.name] = e.target.value
-            this.setState({
-              data: obj
-           });
-          }      
+        let obj = {...this.state.data};                
+        obj[e.target.name] = e.target.value
+        this.setState({
+            data: obj           
+          })     
       }
     saveCard = async (e) => {
         e.preventDefault();
@@ -72,7 +58,7 @@ class EditCard extends Component{
             'Accept': 'application/json', 
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(this.state.data[0])         
+          body: JSON.stringify(this.state.data)         
         }
           await(await fetch(url, options)).json(); 
           this.props.listData(); 
@@ -82,7 +68,23 @@ class EditCard extends Component{
         } catch (err) {
           console.log(err);
         }          
-    }      
+    } 
+    filterLabels = (e) => {      
+        let obj = {...this.state.data};  
+        if (obj.labels.includes(e.target.value)) {
+          obj.labels = obj.labels.filter(item => {
+            return item !== e.target.value            
+          }) 
+          this.setState({
+            data: obj
+          })            
+        }else{
+          obj.labels.push(e.target.value);         
+            this.setState({
+              data: obj
+            });
+        }                     
+    }     
     render(){
         return(
           <div>
@@ -93,22 +95,20 @@ class EditCard extends Component{
                       <Form onSubmit={this.saveCard}>
                         <Form.Group className="mb-3">                            
                                     <Form.Label>Title</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter title" name="title" value={this.state.data[0].title} onChange={this.handleChange}/>                                                                                                       
+                                    <Form.Control type="text" placeholder="Enter title" name="title" value={this.state.data.title} onChange={this.handleChange}/>                                                                                                       
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as="textarea" rows={5} placeholder="Enter description" value={this.state.data[0].description} onChange={this.handleChange} name="description"/>
+                        <Form.Control as="textarea" rows={5} placeholder="Enter description" value={this.state.data.description} onChange={this.handleChange} name="description"/>
                       </Form.Group>
 
                       <Form.Group className="mb-3">
-                      <Form.Select aria-label="Default select example" value={this.state.data.labels} onChange={this.handleChange} name='labels'  multiple={true} type="select-multiple">                                              
+                      <Form.Select aria-label="Default select example" defaultValue={this.state.labels}  name='labels' onChange={this.filterLabels}  multiple={true} type="select-multiple">                                                                     
                         {this.state.labels.map(item => {
-                            if (item == this.state.data[0].labels) {                                
-                                return <option value={item} selected>{item}</option>                                              
-                            }else{
-                                return <option value={item}>{item}</option> 
-                            }
+                                if (item !== "") {
+                                  return <option key={item} value={item}>{item}</option>                            
+                                }else {}                                                            
                         })}                       
                       </Form.Select>
                       </Form.Group>
