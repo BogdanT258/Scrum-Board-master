@@ -236,9 +236,7 @@
     {
       "title": "fa",
       "labels": [
-        "on hold",
-        "bug",
-        "enhancement"
+        "bug"
       ],
       "description": " fae",
       "state": "todo",
@@ -248,7 +246,6 @@
       "title": "ddgaad",
       "labels": [
         "report",
-        "bug",
         "enhancement"
       ],
       "description": " dgad",

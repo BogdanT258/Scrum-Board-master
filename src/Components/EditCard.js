@@ -90,7 +90,7 @@ class EditCard extends Component{
           <div>
               <Button onClick={this.onClickButton}>
                       <BsFillPenFill/>
-                    </Button>
+                    </Button>              
                     <Modal open={this.state.openModal} onClose={this.onCloseModal}>
                       <Form onSubmit={this.saveCard}>
                         <Form.Group className="mb-3">                            
@@ -117,7 +117,7 @@ class EditCard extends Component{
                         Save
                       </Button>
                       </Form>
-                    </Modal>                     
+                    </Modal>                                     
           </div>
         )
     }
