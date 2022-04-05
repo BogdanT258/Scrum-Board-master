@@ -1,8 +1,14 @@
 import './App.css';
 import { Component } from 'react';
 import BoardComponent from './Components/BoardComponent'
-import InnerCard from './Components/InnerCard'
-
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,  
+} from "react-router-dom";
+import InnerCard from './Components/InnerCard';
+import allCards from './Components/allCards';
 
 class App extends Component{
   constructor(props){
@@ -12,7 +18,12 @@ class App extends Component{
 
   render(){
     return (
-      <div className='outer-div'>
+      <div className='outer-div'> 
+        <Router>
+          <Routes>
+            <Route path='/' element={allCards}/>
+          </Routes>
+        </Router>               
         <BoardComponent/>
       </div>
     )

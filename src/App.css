@@ -65,14 +65,6 @@ option{
   display: flex;
   flex-wrap: wrap;
 }
-.my-modal{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .react-responsive-modal-modal{
   min-width: 500px;  
-}
-.react-responsive-modal-root{
-  
 }

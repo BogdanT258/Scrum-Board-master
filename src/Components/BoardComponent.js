@@ -1,6 +1,13 @@
 import '../App.css';
 import { Component } from 'react';
 import Board from './Board';
+import {
+  BrowserRouter as Router,
+  Routes ,
+  Route,
+  NavLink,  
+} from "react-router-dom";
+import InnerCard from './InnerCard';
 
 class BoardComponent extends Component{
     constructor(props){
@@ -29,7 +36,7 @@ class BoardComponent extends Component{
         return(
           <div className='container'>
             <div>
-              <h1>SCRUM BOARD</h1>
+              <h1>SCRUM BOARD</h1>              
             </div>
             <div className='cards'>                                        
               {this.state.data.map(item => {
