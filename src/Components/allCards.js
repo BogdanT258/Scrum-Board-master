@@ -1,7 +1,6 @@
 import '../App.css';
 import { Component } from 'react';
 
-
 class allCards extends Component{
     constructor(props){
         super(props)                         

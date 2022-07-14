@@ -5,9 +5,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  NavLink,  
+  Link
 } from "react-router-dom";
-import InnerCard from './Components/InnerCard';
 import allCards from './Components/allCards';
 
 class App extends Component{
@@ -18,14 +17,28 @@ class App extends Component{
 
   render(){
     return (
-      <div className='outer-div'> 
-        <Router>
-          <Routes>
-            <Route path='/' element={allCards}/>
-          </Routes>
-        </Router>               
-        <BoardComponent/>
-      </div>
+      <div className='outer-div'>              
+        {/* <Router>
+        <ul>
+          <li>
+            <Link to="/">Boards</Link>
+          </li>
+          <li>
+            <Link to="/cards">All Cards</Link>
+          </li>
+        </ul>       
+        <hr /> 
+        <Routes>
+          <Route exact path="/">
+            <BoardComponent />
+          </Route>
+          <Route path="/cards">
+            <allCards />
+          </Route>
+        </Routes>       
+        </Router>   */}                            
+        <BoardComponent/>      
+      </div>  
     )
   }
 }
